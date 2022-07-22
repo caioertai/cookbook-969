@@ -8,4 +8,4 @@
 # Features
 - [x] Lists recipes
 - [x] Add recipe
-- [ ] Remove recipe
+- [x] Remove recipe
