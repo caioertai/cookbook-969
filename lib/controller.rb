@@ -1,3 +1,4 @@
+require_relative "all_recipes_scraper"
 require_relative "recipe"
 require_relative "view"
 
@@ -54,5 +55,19 @@ class Controller
     recipe_to_mark.mark_as_done! # Recipe Instance
     # Ask COOKBOOK to persist the change
     @cookbook.persist! # public method
+  end
+
+  def search
+    # Ask VIEW to ask user for a query (search inputs)
+    query = @view.ask_for_string("ingredient you're searching for")
+    # Ask SCRAPER for a list of recipes
+    recipes = AllRecipesScraper.new(query).call
+    # Ask VIEW to display them
+    @view.display(recipes)
+    # Ask VIEW to ask user for a recipe to add (by number)
+    index = @view.ask_for_index
+    new_recipe = recipes[index]
+    # Ask COOKBOOK to add it
+    @cookbook.add_recipe(new_recipe)
   end
 end

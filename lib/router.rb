@@ -20,6 +20,7 @@ class Router
     puts '2. Add recipe'
     puts '3. Remove recipe'
     puts '4. Mark as done'
+    puts '5. Search on AllRecipes'
     puts '0. Quit'
   end
 
@@ -31,6 +32,7 @@ class Router
     when 2 then @controller.create
     when 3 then @controller.destroy
     when 4 then @controller.mark
+    when 5 then @controller.search
     when 0 then @running = false
     end
   end
