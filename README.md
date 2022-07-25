@@ -1,6 +1,10 @@
 # Recipe
-- @name - String
+```
+- @name        - String
 - @description - String
+- @rating      - Integer
+- @done        - boolean (true/false)
+```
 
 # Cookbook
 - @recipes - Array
