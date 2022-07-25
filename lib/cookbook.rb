@@ -1,3 +1,4 @@
+require "pry-byebug"
 require "csv"
 require_relative "recipe"
 
@@ -22,20 +23,35 @@ class Cookbook # repository
     update_csv
   end
 
+  def persist!
+    update_csv
+  end
+
   private
 
   def load_csv
     CSV.foreach(@csv_path, headers: true, header_converters: :symbol) do |row|
-      @recipes << Recipe.new(row[:name], row[:description])
+      # row => { name: "Pizza", description: "Flour and cheese", rating: "5" }
+      # Data Type Casting
+      # name        --- String
+      # description --- String
+      # rating      --- Integer
+      # done        --- boolean (true/false)
+      row[:rating] = row[:rating].to_i # => "5".to_i => 5
+      row[:done]   = row[:done] == "true"
+
+      # row => { name: "Pizza", description: "Flour and cheese", rating: 5 }
+
+      @recipes << Recipe.new(row)
     end
   end
 
   def update_csv
     CSV.open(@csv_path, "wb") do |csv|
-      csv << ["name", "description"]
+      csv << ["name", "description", "rating", "done"]
       @recipes.each do |recipe|
         # Dehidration / Serialization / Storing
-        csv << [recipe.name, recipe.description]
+        csv << [recipe.name, recipe.description, recipe.rating, recipe.done?]
       end
     end
   end

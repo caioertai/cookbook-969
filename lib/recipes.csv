@@ -1,5 +1,3 @@
-name,description
-Pizza,Cheese and Bread
-Caipirinha,Lemon and Cachaça
-Bread,Flour and water
-Mojito,Mint and rum
+name,description,rating,done
+Pizza,Cheese and Bread,4,true
+Caipirinha,Lemon and Cachaça,5,true
